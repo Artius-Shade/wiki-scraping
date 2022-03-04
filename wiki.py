@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 
+# The results from the function can be made 'prettier' by using string formatting
+
 
 def short_def(search_):
     '''Scrapes wikipedia to return a short defeniton of string as argument.'''
