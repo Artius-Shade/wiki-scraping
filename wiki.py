@@ -5,7 +5,7 @@ import requests
 
 
 def short_def(search_):
-    '''Scrapes wikipedia to return a short defeniton of string as argument.'''
+    """Scrapes wikipedia to return a short definition of string as argument."""
     source = requests.get(f'https://en.wikipedia.org/wiki/{search_}').text
 
     soup = BeautifulSoup(source, 'lxml')
@@ -14,7 +14,7 @@ def short_def(search_):
     intrs = intrs.find('div', class_='mw-body')
     intrs = intrs.find('div', class_='vector-body')
     intrs_list = intrs.find_all('p', class_='')
-    # By observations it was found that only that the pargraph tag containing nested bold tag is the item of intrest.
+    # By observations, it was found that only that the paragraph tag containing nested bold tag is the item of interest.
     # but that may not be true always as I only tested the program on few pages.
     for item in intrs_list:
         if item.b:
@@ -22,7 +22,7 @@ def short_def(search_):
             break
     heading = intrs.b.text
     # When the search is not found the server responds with "Other reasons this message may be displayed:",
-    # which is quite ambiguos of an 'not found message' so, this function returns this not found which gives better
+    # which is quite ambiguous of an 'not found message' so, this function returns this not found which gives better
     # idea of what went wrong.
     if heading.startswith('Other reasons this'):
         return "Sorry, your search can't be found. Try again with different words."
@@ -34,8 +34,8 @@ def short_def(search_):
 
 
 def wiki(search_):
-    '''A modified version of short_def, which retuns the defeniton of argument as well as 
-    defenitons of all the keywords found within the defeniton of argument.'''
+    """A modified version of short_def, which returns the definition of argument as well as
+    definitions of all the keywords found within the definition of argument."""
     source = requests.get(f'https://en.wikipedia.org/wiki/{search_}').text
 
     soup = BeautifulSoup(source, 'lxml')
