@@ -6,6 +6,8 @@ import requests
 
 def short_def(search_):
     """Scrapes wikipedia to return a short definition of string as argument."""
+    if len(search_) < 1:
+        return "No search found"
     source = requests.get(f'https://en.wikipedia.org/wiki/{search_}').text
 
     soup = BeautifulSoup(source, 'lxml')
